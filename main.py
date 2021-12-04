@@ -64,10 +64,22 @@ class Learning:
         print(classification_report(y_test, y_rf))
         cm = confusion_matrix(y_test, y_rf)
         print(cm)
-
+    
+    def down_sampling(self):
+        df.Class.value_counts()
+        rus = RandomUnderSampler()
+        X_train, y_train = rus.fit_resample(X_train, y_train)
+        y_train.value_counts()
+        rf = ensemble.RandomForestClassifier()
+        rf.fit(X_train, y_train)
+        y_rf = rf.predict(X_test)
+        print(classification_report(y_test, y_rf))
+        cm = confusion_matrix(y_test, y_rf)
+        print(cm)
 
 
 Learn = Learning()
 # Learn.superVectorMachine()
 # Learn.RandomForest()
-Learn.over_sampling()
+# Learn.over_sampling()
+Learn.down_sampling()
