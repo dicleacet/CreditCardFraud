@@ -14,7 +14,7 @@ from sklearn import model_selection
 from sklearn.metrics import classification_report, confusion_matrix, roc_curve, roc_auc_score,auc, accuracy_score
 
 
-df = pd.read_csv("C:\\Users\\fawmain\\Desktop\\kredi kartı\\CreditCardFraud\\creditcard.csv")
+df = pd.read_csv('creditcard.csv')
 df.drop('Time',axis=1,inplace=True)
 
 class Learning:
@@ -66,6 +66,11 @@ class Learning:
         print(cm)
     
     def down_sampling(self):
+        X = df.drop(['Class'], axis=1)
+        y = df.Class
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=1)
+        smote = SMOTE()
+        X_train, y_train = smote.fit_resample(X_train, y_train)
         df.Class.value_counts()
         rus = RandomUnderSampler()
         X_train, y_train = rus.fit_resample(X_train, y_train)
@@ -76,6 +81,7 @@ class Learning:
         print(classification_report(y_test, y_rf))
         cm = confusion_matrix(y_test, y_rf)
         print(cm)
+        
 
 
 Learn = Learning()
