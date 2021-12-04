@@ -83,7 +83,7 @@ class Learning:
         print(cm)
         
 
-
+d
 Learn = Learning()
 # Learn.superVectorMachine()
 # Learn.RandomForest()
